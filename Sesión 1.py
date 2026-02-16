@@ -45,6 +45,7 @@ obs = 1000
 # como la prueba de Dickey-Fuller) y otras técnicas estadísticas para confirmar las conclusiones obtenidas visualmente.    
 
 #---- Simulación de un proceso de ruido blanco ---- ARIMA(0,0,0)
+print("1. PROCESO DE RUIDO BLANCO - ARIMA(0,0,0)")
 np.random.seed(1)
 innov = np.random.normal(0, 1, obs)
 yt_rb = pd.Series(innov, index=pd.date_range('2000-01-01', periods=obs, freq='D'))
@@ -57,10 +58,10 @@ plot_pacf(yt_rb, lags=20, ax=axes[1,0], title='FACP ARIMA(0,0,0)')
 plt.tight_layout()
 plt.show()
 
-#---- Simulación de un proceso AR(1) estacionario ---- ARIMA(1,0,0)
-print("\n2. PROCESO AR(1) ESTACIONARIO - ARIMA(1,0,0)")
-np.random.seed(8202)
-ar1 = np.array([1, -0.6])  # φ₁ = 0.6
+#%% Simulación de un proceso AR(1) estacionario ARIMA(1,0,0)
+print("2. PROCESO AR(1) ESTACIONARIO - ARIMA(1,0,0)")
+np.random.seed(1)
+ar1 = np.array([1, -0.6])  # φ₁=0.6 (estacionariedad)
 ma1 = np.array([1])
 arma_process1s = ArmaProcess(ar1, ma1)
 yt1s = arma_process1s.generate_sample(nsample=obs)
@@ -73,9 +74,9 @@ plot_pacf(yt1s, lags=20, ax=axes[2], title='PACF AR(1)')
 plt.tight_layout()
 plt.show()
 
-#---- Simulación de un proceso AR(1) no estacionario ---- ARIMA(1,1,0)
-print("\n3. PROCESO AR(1) NO ESTACIONARIO - ARIMA(1,1,0)")
-np.random.seed(29101)
+#%% Simulación de un proceso AR(1) no estacionario ---- ARIMA(1,1,0)
+print("3. PROCESO AR(1) NO ESTACIONARIO - ARIMA(1,1,0)")
+np.random.seed(1)
 ar1n = np.array([1, -0.5])
 ma1n = np.array([1])
 arma_process1n = ArmaProcess(ar1n, ma1n)
@@ -94,8 +95,8 @@ diff_yt1n.plot(ax=axes[1,1], title='1ra Diferencia - Estacionaria',
 plt.tight_layout()
 plt.show()
 
-#---- Simulación de un proceso AR(2) estacionario ---- ARIMA(2,0,0)
-print("\n4. PROCESO AR(2) ESTACIONARIO - ARIMA(2,0,0)")
+#%% Simulación de un proceso AR(2) estacionario ARIMA(2,0,0)
+print("4. PROCESO AR(2) ESTACIONARIO - ARIMA(2,0,0)")
 np.random.seed(2929)
 ar2s = np.array([1, -0.6, -0.3])  # φ₁=0.6, φ₂=0.3
 ma2s = np.array([1])
@@ -109,8 +110,8 @@ plot_pacf(yt2s, lags=20, ax=axes[2], title='PACF AR(2)')
 plt.tight_layout()
 plt.show()
 
-#---- Simulación AR(2) no estacionario ---- ARIMA(2,1,0)
-print("\n5. PROCESO AR(2) NO ESTACIONARIO - ARIMA(2,1,0)")
+#%% Simulación AR(2) no estacionario ---- ARIMA(2,1,0)
+print("5. PROCESO AR(2) NO ESTACIONARIO - ARIMA(2,1,0)")
 np.random.seed(202)
 yt2n = arma_process2s.generate_sample(nsample=obs).cumsum()  # d=1
 
@@ -124,8 +125,8 @@ plot_acf(diff_yt2n, lags=20, ax=axes[1,0], title='ACF 1ra Diferencia')
 plt.tight_layout()
 plt.show()
 
-#---- Simulación MA(1) ---- ARIMA(0,0,1)
-print("\n6. PROCESO MA(1) - ARIMA(0,0,1)")
+#%% Simulación MA(1)  ARIMA(0,0,1)
+print("6. PROCESO MA(1) - ARIMA(0,0,1)")
 np.random.seed(2020)
 ar_ma1 = np.array([1])
 ma_ma1 = np.array([1, 0.7])  # θ₁=0.7
@@ -139,8 +140,8 @@ plot_pacf(yt3s, lags=20, ax=axes[2], title='PACF MA(1)')
 plt.tight_layout()
 plt.show()
 
-#---- Simulación MA(2) ---- ARIMA(0,0,2)
-print("\n7. PROCESO MA(2) - ARIMA(0,0,2)")
+#%% Simulación MA(2) ARIMA(0,0,2)
+print("7. PROCESO MA(2) - ARIMA(0,0,2)")
 np.random.seed(10181)
 ma_ma2 = np.array([1, 0.7, 0.25])  # θ₁=0.7, θ₂=0.25
 arma_process_ma2 = ArmaProcess(ar_ma1, ma_ma2)
@@ -154,7 +155,7 @@ plt.tight_layout()
 plt.show()
 
 #---- Simulación ARMA(1,1) estacionario ---- ARIMA(1,0,1)
-print("\n8. PROCESO ARMA(1,1) ESTACIONARIO - ARIMA(1,0,1)")
+print("8. PROCESO ARMA(1,1) ESTACIONARIO - ARIMA(1,0,1)")
 np.random.seed(220422)
 ar_arma = np.array([1, -0.7])  # φ₁=0.7
 ma_arma = np.array([1, 0.3])   # θ₁=0.3
@@ -168,8 +169,8 @@ plot_pacf(yt5s, lags=20, ax=axes[2], title='PACF ARMA(1,1)')
 plt.tight_layout()
 plt.show()
 
-#---- Simulación ARMA(1,1) no estacionario ---- ARIMA(1,1,1)
-print("\n9. PROCESO ARMA(1,1) NO ESTACIONARIO - ARIMA(1,1,1)")
+#%% Simulación ARMA(1,1) no estacionario ARIMA(1,1,1)
+print("9. PROCESO ARMA(1,1) NO ESTACIONARIO - ARIMA(1,1,1)")
 np.random.seed(81711)
 arma_process_arma_n = ArmaProcess(np.array([1, -0.6]), np.array([1, 0.7]))
 yt5n = arma_process_arma_n.generate_sample(nsample=obs).cumsum()
@@ -185,6 +186,7 @@ plot_acf(dif_yt5n, lags=20, ax=axes[1,0], title='ACF 1ra Diferencia')
 plt.tight_layout()
 plt.show()
 
+#%%  conclusiones finales
 print("\n=== RESUMEN DE PATRONES IDENTIFICADOS ===")
 print("""
 • AR(p) estacionario: ACF cae geométricamente, PACF se corta después de p rezagos
@@ -195,3 +197,5 @@ print("""
 • SIEMPRE complementar gráficos con pruebas formales (Dickey-Fuller, etc.)
 """)
 
+
+# %%
