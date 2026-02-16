@@ -77,7 +77,7 @@ print(f"Longitud: {len(curso)}")
 print(f"Reemplazar: {curso.replace('II', 'III')}")
 
 # Slicing
-print(f"Primeros 5 caracteres: {curso[:5]}")
+print(f"Primeros 5 caracteres: {curso[:7]}")
 print(f"Últimos 2 caracteres: {curso[-2:]}")
 # %% 5. Listas
 
